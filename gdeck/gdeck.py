@@ -1,5 +1,9 @@
 class Card:
     def __init__(self, rank, suit):
+        """
+        param rank: preferably a card rank, but can be anything
+        param suit: preferably a card suit, but can be anything
+        """
         self.rank = rank
         self.suit = suit
 
@@ -12,14 +16,14 @@ class Deck:
     suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 
     def __init__(self):
+        """
+        Initializes a list of cards.
+        """
         self.cards = [Card(rank, suit) for rank in self.ranks for suit in self.suits]
         self.count = 0
 
-    def __getitem__(self, position):
-        return self.cards[position]
-
-    def __len__(self):
-        return len(self.cards)
+    def __iter__(self):
+        return self
 
     def __next__(self):
         if self.count >= len(self.cards):
@@ -29,10 +33,13 @@ class Deck:
         return current
 
     def __repr__(self):
-        some_str = ""
-        for card in self.cards:
-            some_str += "\t{}\n".format(card)
-        return some_str
+        return str(self.cards)
+
+    def __getitem__(self, position):
+        return self.cards[position]
+
+    def __len__(self):
+        return len(self.cards)
 
 
 
